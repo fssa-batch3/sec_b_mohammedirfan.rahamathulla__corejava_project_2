@@ -96,8 +96,8 @@ public class TestCreateUser {
 			user.setLastName(null);
 			user.setArea("vadalur");
 			user.setCity("Kadalur");
-			user.setEmailId("santhoshasadasdasd@gmail.com");
-			user.setPassword("Santh@12");
+			user.setEmailId("bakya@gmail.com");
+			user.setPassword("Bakya@12");
 			
 			Exception excp = assertThrows(ValidationException.class , ()->{
 				us.create(user);
@@ -105,6 +105,7 @@ public class TestCreateUser {
 			
 			String m1 = "last name cannot be null or empty";
 			String m2 = excp.getMessage();
+			System.out.println(m2);
 			assertTrue(m1.equals(m2));
 		}
 		
@@ -117,8 +118,8 @@ public class TestCreateUser {
 			user.setLastName("");
 			user.setArea("vadalur");
 			user.setCity("Kadalur");
-			user.setEmailId("santhoshasadasdasd@gmail.com");
-			user.setPassword("Santh@12");
+			user.setEmailId("bakya@gmail.com");
+			user.setPassword("Bakya@12");
 			
 			Exception excp = assertThrows(ValidationException.class , ()->{
 				us.create(user);

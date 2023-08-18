@@ -11,6 +11,11 @@ import in.fssa.turf.model.*;
 
 	
 	public class UserValidator {
+		/** 
+		 * 
+		 * @param user
+		 * @throws ValidationException
+		 */
 		public static void validateForCreate(UserEntity user) throws ValidationException {
 			if(user == null) {
 				throw new ValidationException("User cannot be null");
@@ -55,7 +60,12 @@ import in.fssa.turf.model.*;
 			
 			
 		}
-		
+		/** 
+		 * 
+		 * @param id
+		 * @param user
+		 * @throws ValidationException
+		 */
 		public static void validateForUpdate(int id,UserEntity user) throws ValidationException{
 			if(user == null) {
 				throw new ValidationException("user cannot be null");
@@ -89,7 +99,11 @@ import in.fssa.turf.model.*;
 	            throw new ValidationException("Password doesn't match the required format");
 	        }
 		}
-		
+		/** 
+		 * 
+		 * @param id
+		 * @throws ValidationException
+		 */
 		public static void validateForId(int id) throws ValidationException {
 			if(id <=0) {
 				throw new ValidationException("id cannot be negative");
@@ -101,7 +115,11 @@ import in.fssa.turf.model.*;
 			}
 			
 		}
-		
+		/** 
+		 * 
+		 * @param email
+		 * @throws ValidationException
+		 */
 		public static void validateForEmail(String email) throws ValidationException{
 			StringUtil.rejectIfInvalidString(email, "email");
 			

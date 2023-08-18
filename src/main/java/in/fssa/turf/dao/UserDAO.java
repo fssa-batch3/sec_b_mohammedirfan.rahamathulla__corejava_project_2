@@ -7,10 +7,15 @@ import java.sql.SQLException;
 import java.util.Set;
 import java.util.HashSet;
 
+import in.fssa.turf.exception.ValidationException;
 import in.fssa.turf.model.UserEntity;
 import in.fssa.turf.util.ConnectionUtil;
 
 public class UserDAO {
+	/**
+	 * 
+	 * @return
+	 */
 	public Set<UserEntity> findAll() {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -44,10 +49,11 @@ public class UserDAO {
 
 		return userList;
 	}
-
-	
-	
-	
+   /**
+    * 
+    * @param newUser
+    * @throws RuntimeException
+    */
 	public void create(UserEntity newUser) throws RuntimeException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -83,7 +89,11 @@ public class UserDAO {
 		}
 	}
 
-	
+	/** 
+	 * 
+	 * @param id
+	 * @param newUser
+	 */
 	public void update(int id, UserEntity newUser) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -113,7 +123,10 @@ public class UserDAO {
 		}
 	}
 
-	
+	/** 
+	 * 
+	 * @param id
+	 */
 	public void delete(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -138,7 +151,11 @@ public class UserDAO {
 		}
 	}
 
-	
+	/** 
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public UserEntity findById(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -173,7 +190,11 @@ public class UserDAO {
 		return user;
 	}
 
-	
+	/** 
+	 * 
+	 * @param email
+	 * @return
+	 */
 	public UserEntity findByEmail(String email) {
 		Connection con = null;
 		PreparedStatement ps = null;

@@ -11,6 +11,11 @@ import in.fssa.turf.model.*;
 
 	
 	public class TurfValidator {
+		/** 
+		 * 
+		 * @param turf
+		 * @throws ValidationException
+		 */
 		public static void validateForCreate(TurfEntity turf) throws ValidationException {
 			if(turf == null) {
 				throw new ValidationException("Turf cannot be null or empty");
@@ -27,6 +32,12 @@ import in.fssa.turf.model.*;
 			StringUtil.rejectIfInvalidString(turf.getClosingHours(), "closing hours");		
 		}
 		
+		/** 
+		 * 
+		 * @param id
+		 * @param turf
+		 * @throws ValidationException
+		 */
 		public static void validateForUpdate(int id,TurfEntity turf) throws ValidationException{
 			if(turf == null) {
 				throw new ValidationException("turf cannot be null or empty");
@@ -50,7 +61,11 @@ import in.fssa.turf.model.*;
 			StringUtil.rejectIfInvalidString(turf.getClosingHours(), "closing hours");
 			
 		}
-		
+		/** 
+		 * 
+		 * @param id
+		 * @throws ValidationException
+		 */
 		public static void validateForId(int id) throws ValidationException {
 			if(id <=0) {
 				throw new ValidationException("id cannot be negative");

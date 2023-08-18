@@ -7,11 +7,16 @@ import java.sql.SQLException;
 import java.util.Set;
 import java.util.HashSet;
 
+import in.fssa.turf.exception.ValidationException;
 import in.fssa.turf.model.TurfEntity;
 import in.fssa.turf.model.UserEntity;
 import in.fssa.turf.util.ConnectionUtil;
 
 public class TurfDAO {
+/** 
+ * 
+ * @return
+ */
 	public Set<TurfEntity> findAll() {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -46,10 +51,11 @@ public class TurfDAO {
 
 		return turfList;
 	}
-
-	
-	
-	
+  /** 
+   * 
+   * @param newTurf
+   * @throws RuntimeException
+   */
 	public void create(TurfEntity newTurf) throws RuntimeException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -85,7 +91,11 @@ public class TurfDAO {
 		}
 	}
 
-	
+/** 
+ * 
+ * @param id
+ * @param newTurf
+ */
 	public void update(int id, TurfEntity newTurf) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -116,7 +126,10 @@ public class TurfDAO {
 		}
 	}
 
-	
+	/** 
+	 * 
+	 * @param id
+	 */
 	public void delete(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -141,7 +154,11 @@ public class TurfDAO {
 		}
 	}
 
-	
+	/** 
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public TurfEntity findById(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -175,6 +192,11 @@ public class TurfDAO {
 
 		return turf;
 	}
+	/** 
+	 * 
+	 * @param area
+	 * @return
+	 */
 	public Set<TurfEntity> findAllByArea(String area) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -211,6 +233,11 @@ public class TurfDAO {
 
 		return turfs;
 	}
+	/** 
+	 * 
+	 * @param turfCity
+	 * @return
+	 */
 	public Set<TurfEntity> findAllByCity(String turfCity) {
 		Connection con = null;
 		PreparedStatement ps = null;

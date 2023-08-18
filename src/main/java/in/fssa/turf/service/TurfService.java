@@ -10,7 +10,11 @@ import in.fssa.turf.validator.TurfValidator;
 import in.fssa.turf.validator.UserValidator;
 
 	public class TurfService {
-		
+		/** 
+		 * 
+		 * @param newUser
+		 * @throws ValidationException
+		 */
 		public void create(TurfEntity newUser) throws ValidationException{
 			
 			 TurfValidator.validateForCreate(newUser);
@@ -27,7 +31,12 @@ import in.fssa.turf.validator.UserValidator;
 			return turfArray;
 		}
 		
-		
+		/** 
+		 * 
+		 * @param id
+		 * @param newTurf
+		 * @throws ValidationException
+		 */
 		public static void update(int id , TurfEntity  newTurf) throws ValidationException {
 			TurfValidator.validateForUpdate(id , newTurf);
 			TurfDAO turfObj = new TurfDAO();
@@ -35,12 +44,23 @@ import in.fssa.turf.validator.UserValidator;
 			turfObj.update(id, newTurf);
 		}
 		
-		
+		/** 
+		 * 
+		 * @param id
+		 * @throws ValidationException
+		 */
 		public void delete(int id) throws ValidationException {
 			TurfValidator.validateForId(id);
 			TurfDAO turfObj = new TurfDAO();
 			turfObj.delete(id);
 		}
+		/** 
+		 * 
+		 * @param turfArea
+		 * @return
+		 * @throws ValidationException
+		 */
+	
 		
 		public static Set<TurfEntity> getByArea(String turfArea) throws ValidationException {
 			 StringUtil.rejectIfInvalidString(turfArea, "turfArea");
@@ -48,6 +68,12 @@ import in.fssa.turf.validator.UserValidator;
 			return turfObj.findAllByArea(turfArea);
 			
 		}
+		/** 
+		 * 
+		 * @param turfcity
+		 * @return
+		 * @throws ValidationException
+		 */
 		public static Set<TurfEntity> getByCity(String turfcity) throws ValidationException {
 			 StringUtil.rejectIfInvalidString(turfcity, "turfCity");
 			 TurfDAO turfObj = new TurfDAO();
