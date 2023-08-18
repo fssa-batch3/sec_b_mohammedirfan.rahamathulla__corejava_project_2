@@ -32,8 +32,9 @@ public class TestCreateTurf {
 				Exception exception = assertThrows(ValidationException.class,() ->{
 					turfService.create(null);
 				});
-				String expectedMessage = "Turf cannot be null";
+				String expectedMessage = "Turf cannot be null or empty";
 				String receivedMessage = exception.getMessage();
+				
 				assertTrue(expectedMessage.equals(receivedMessage));
 			}
 			
@@ -56,7 +57,6 @@ public class TestCreateTurf {
 				
 				String m1 = "name cannot be null or empty";
 				String m2 = excp.getMessage();
-				System.out.println(m2);
 				assertTrue(m1.equals(m2));
 			}
 			@Test
@@ -137,6 +137,7 @@ public class TestCreateTurf {
 				});
 				String m1 = "city cannot be null or empty";
 				String m2 = excp.getMessage();
+				System.out.println(m2);
 				assertTrue(m1.equals(m2));
 			}
 			
