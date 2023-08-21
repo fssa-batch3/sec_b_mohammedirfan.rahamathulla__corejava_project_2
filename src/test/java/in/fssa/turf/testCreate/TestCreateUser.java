@@ -21,7 +21,7 @@ public class TestCreateUser {
 			user.setLastName("thosh");
 			user.setArea("vadalur");
 			user.setCity("Kadalur");
-			user.setEmailId("irfu@gmail.com");
+			user.setEmailId("irfu1@gmail.com");
 			user.setPassword("Santh@12");
 			user.setAddress("nesamani poniyar theru");
 			
@@ -71,11 +71,11 @@ public class TestCreateUser {
 			UserEntity user = new UserEntity();
 			
 			user.setFirstName("");
-			user.setLastName("thosh");
-			user.setArea("vadalur");
-			user.setCity("Kadalur");
-			user.setEmailId("santhoshasadasdasd@gmail.com");
-			user.setPassword("Santh@12");
+			user.setLastName("box");
+			user.setArea("naavalur");
+			user.setCity("chennai");
+			user.setEmailId("bakyalakshmi@gmail.com");
+			user.setPassword("Bakya@12");
 			
 			
 			Exception excp = assertThrows(ValidationException.class , ()->{
@@ -134,12 +134,12 @@ public class TestCreateUser {
 		public void testCreateUserWithnullArea() {
 			UserService us = new UserService();
 			UserEntity user = new UserEntity();
-			user.setFirstName("san");
-			user.setLastName("thosh");
+			user.setFirstName("thamim");
+			user.setLastName("subansait");
 			user.setArea(null);
-			user.setCity("Kadalur");
-			user.setEmailId("santhoshasadasdasd@gmail.com");
-			user.setPassword("Santh@12");
+			user.setCity("coimbatore");
+			user.setEmailId("tommy@gmail.com");
+			user.setPassword("Tommy@12");
 			
 			
 			Exception excp = assertThrows(ValidationException.class , () ->{
@@ -154,12 +154,12 @@ public class TestCreateUser {
 		public void testCreateUserWithEmptyArea() {
 			UserService us = new UserService();
 			UserEntity user = new UserEntity();
-			user.setFirstName("san");
-			user.setLastName("thosh");
+			user.setFirstName("thamim");
+			user.setLastName("subansait");
 			user.setArea("");
-			user.setCity("Kadalur");
-			user.setEmailId("santhoshasadasdasd@gmail.com");
-			user.setPassword("Santh@12");
+			user.setCity("coimabtore");
+			user.setEmailId("tommy@gmail.com");
+			user.setPassword("Tommy@12");
 			
 			
 			Exception excp = assertThrows(ValidationException.class , () ->{
@@ -176,12 +176,12 @@ public class TestCreateUser {
 		public void testCreateUserWithnullCity() {
 			UserService us = new UserService();
 			UserEntity user = new UserEntity();
-			user.setFirstName("san");
-			user.setLastName("thosh");
-			user.setArea("vadalur");
+			user.setFirstName("mani");
+			user.setLastName("vannan");
+			user.setArea("guduvanchery");
 			user.setCity(null);
-			user.setEmailId("santhoshasadasdasd@gmail.com");
-			user.setPassword("Santh@12");
+			user.setEmailId("mani@gmail.com");
+			user.setPassword("Manni@12");
 			
 			
 			Exception excp = assertThrows(ValidationException.class , () ->{
@@ -198,12 +198,12 @@ public class TestCreateUser {
 		public void testCreateUserWithemptyCity() {
 			UserService us = new UserService();
 			UserEntity user = new UserEntity();
-			user.setFirstName("san");
-			user.setLastName("thosh");
-			user.setArea("vadalur");
+			user.setFirstName("mani");
+			user.setLastName("vannan");
+			user.setArea("guduvanchery");
 			user.setCity("");
-			user.setEmailId("santhoshasadasdasd@gmail");
-			user.setPassword("Santh@12");
+			user.setEmailId("mani@gmail");
+			user.setPassword("Manni@12");
 			
 			
 			Exception excp = assertThrows(ValidationException.class , () ->{

@@ -40,7 +40,7 @@ import in.fssa.turf.model.*;
 		 */
 		public static void validateForUpdate(int id,TurfEntity turf) throws ValidationException{
 			if(turf == null) {
-				throw new ValidationException("turf cannot be null or empty");
+				throw new ValidationException("turf cannot be null");
 			}
 			if(turf.getId()<0) {
 				throw new ValidationException("id cannot be negative");
