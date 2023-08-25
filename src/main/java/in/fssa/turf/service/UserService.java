@@ -16,15 +16,15 @@ import in.fssa.turf.validator.UserValidator;
 			
 			 UserValidator.validateForCreate(newUser);
 			
-			UserDAO userObj = new UserDAO();
-			userObj.create(newUser);
+			UserDAO userDAO = new UserDAO();
+			userDAO.create(newUser);
 			
 			
 		}
 		
 		public Set<UserEntity> getAll() {
-			UserDAO userObj = new UserDAO();
-			Set<UserEntity> userArray = userObj.findAll();
+			UserDAO userDAO = new UserDAO();
+			Set<UserEntity> userArray = userDAO.findAll();
 			return userArray;
 		}
 		/** 
@@ -36,9 +36,9 @@ import in.fssa.turf.validator.UserValidator;
 		
 		public static void update(int id , UserEntity  newUser) throws ValidationException {
 			 UserValidator.validateForUpdate(id , newUser);
-			UserDAO userObj = new UserDAO();
+			UserDAO userDAO = new UserDAO();
 			
-			 userObj.update(id, newUser);
+			userDAO.update(id, newUser);
 		}
 		/** 
 		 * 
@@ -47,8 +47,8 @@ import in.fssa.turf.validator.UserValidator;
 		 */
 		public void delete(int id) throws ValidationException {
 			 UserValidator.validateForId(id);
-			UserDAO userObj = new UserDAO();
-			userObj.delete(id);
+			UserDAO userDAO = new UserDAO();
+			userDAO.delete(id);
 		}
 		/** 
 		 * 
@@ -58,8 +58,8 @@ import in.fssa.turf.validator.UserValidator;
 		 */
 		public static UserEntity getById(int userId) throws ValidationException {
 			 UserValidator.validateForId(userId);
-			UserDAO userObj = new UserDAO();
-			return userObj.findById(userId);
+			UserDAO userDAO = new UserDAO();
+			return userDAO.findById(userId);
 			
 		}
 		/** 
@@ -71,8 +71,8 @@ import in.fssa.turf.validator.UserValidator;
 		
 		public static UserEntity getByEmail(String email) throws ValidationException{
 			 UserValidator.validateForEmail(email);
-			UserDAO ud = new UserDAO();
-			return ud.findByEmail(email);
+			UserDAO userDAO = new UserDAO();
+			return userDAO.findByEmail(email);
 		}
 	}
 

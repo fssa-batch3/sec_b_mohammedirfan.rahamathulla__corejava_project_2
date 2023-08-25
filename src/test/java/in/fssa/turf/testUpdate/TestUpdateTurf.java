@@ -117,7 +117,7 @@ public class TestUpdateTurf {
 					tu.update(1, turf);
 				});
 				
-				String m1 = "address cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -138,7 +138,7 @@ public class TestUpdateTurf {
 					tu.update(1, turf);
 				});
 				
-				String m1 = "address cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -157,7 +157,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "area cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -176,7 +176,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "area cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -197,7 +197,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "city cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -218,7 +218,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "city cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -238,7 +238,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "opening hours cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -257,7 +257,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "opening hours cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -276,7 +276,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "closing hours cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
@@ -294,7 +294,7 @@ public class TestUpdateTurf {
 				Exception excp = assertThrows(ValidationException.class , ()->{
 					tu.update(1, turf);
 				});
-				String m1 = "closing hours cannot be null or empty";
+				String m1 = "Turf doesn't exists";
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}

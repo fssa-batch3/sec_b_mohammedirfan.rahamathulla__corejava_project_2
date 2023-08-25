@@ -19,15 +19,15 @@ import in.fssa.turf.validator.UserValidator;
 			
 			 TurfValidator.validateForCreate(newUser);
 			
-			 TurfDAO turfObj = new TurfDAO();
-			turfObj.create(newUser);
+			 TurfDAO turfDAO = new TurfDAO();
+			 turfDAO.create(newUser);
 			
 			
 		}
 		
 		public Set<TurfEntity> getAll() {
-			TurfDAO turfObj = new TurfDAO();
-			Set<TurfEntity> turfArray = turfObj.findAll();
+			TurfDAO turfDAO = new TurfDAO();
+			Set<TurfEntity> turfArray = turfDAO.findAll();
 			return turfArray;
 		}
 		
@@ -39,9 +39,9 @@ import in.fssa.turf.validator.UserValidator;
 		 */
 		public static void update(int id , TurfEntity  newTurf) throws ValidationException {
 			TurfValidator.validateForUpdate(id , newTurf);
-			TurfDAO turfObj = new TurfDAO();
+			TurfDAO turfDAO = new TurfDAO();
 			
-			turfObj.update(id, newTurf);
+			turfDAO.update(id, newTurf);
 		}
 		
 		/** 
@@ -51,8 +51,8 @@ import in.fssa.turf.validator.UserValidator;
 		 */
 		public void delete(int id) throws ValidationException {
 			TurfValidator.validateForId(id);
-			TurfDAO turfObj = new TurfDAO();
-			turfObj.delete(id);
+			TurfDAO turfDAO = new TurfDAO();
+			turfDAO.delete(id);
 		}
 		/** 
 		 * 
@@ -64,8 +64,8 @@ import in.fssa.turf.validator.UserValidator;
 		
 		public static Set<TurfEntity> getByArea(String turfArea) throws ValidationException {
 			 StringUtil.rejectIfInvalidString(turfArea, "turfArea");
-			 TurfDAO turfObj = new TurfDAO();
-			return turfObj.findAllByArea(turfArea);
+			 TurfDAO turfDAO = new TurfDAO();
+			return turfDAO.findAllByArea(turfArea);
 			
 		}
 		/** 
@@ -76,8 +76,8 @@ import in.fssa.turf.validator.UserValidator;
 		 */
 		public static Set<TurfEntity> getByCity(String turfcity) throws ValidationException {
 			 StringUtil.rejectIfInvalidString(turfcity, "turfCity");
-			 TurfDAO turfObj = new TurfDAO();
-			return turfObj.findAllByCity(turfcity);
+			 TurfDAO turfDAO = new TurfDAO();
+			return turfDAO.findAllByCity(turfcity);
 		}
 		
 		

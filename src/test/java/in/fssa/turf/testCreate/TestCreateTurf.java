@@ -57,6 +57,7 @@ public class TestCreateTurf {
 				
 				String m1 = "name cannot be null or empty";
 				String m2 = excp.getMessage();
+				System.out.println(m2);
 				assertTrue(m1.equals(m2));
 			}
 			@Test

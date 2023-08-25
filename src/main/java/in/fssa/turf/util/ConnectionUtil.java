@@ -6,77 +6,70 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
 public class ConnectionUtil {
-	/** 
+	/**
 	 * 
 	 * @return
 	 */
-	public static  Connection getConnection() {
-		
-		Dotenv env = Dotenv.load();
+	public static Connection getConnection() {
+
 		Connection con = null;
-		String url = env.get("DATABASE_HOSTNAME");
-		String userName = env.get("DATABASE_USERNAME");
-		String password = env.get("DATABASE_PASSWORD");
+		String url = System.getenv("DATABASE_HOSTNAME");
+		String userName = System.getenv("DATABASE_USERNAME");
+		String password = System.getenv("DATABASE_PASSWORD");
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(url,userName,password);
+			con = DriverManager.getConnection(url, userName, password);
 
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 		return con;
 	}
-	/** 
+
+	/**
 	 * 
 	 * @param connection
 	 * @param ps
 	 */
-	public static void close(Connection connection , PreparedStatement  ps) {
+	public static void close(Connection connection, PreparedStatement ps) {
 		try {
-			if(ps !=null) {
+			if (ps != null) {
 				ps.close();
 			}
-			if(connection!= null) {
+			if (connection != null) {
 				connection.close();
 			}
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	/** 
+
+	/**
 	 * 
 	 * @param connection
 	 * @param ps
 	 * @param rs
 	 */
-	 
-	public static void close(Connection connection , PreparedStatement  ps , ResultSet  rs) {
+
+	public static void close(Connection connection, PreparedStatement ps, ResultSet rs) {
 		try {
-			if(rs !=null) {
+			if (rs != null) {
 				rs.close();
 			}
-			if(ps !=null) {
+			if (ps != null) {
 				ps.close();
 			}
-			if(connection!= null) {
+			if (connection != null) {
 				connection.close();
 			}
-			
-		}
-		catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-
-
-
-
 	}
-	
+
 }

@@ -59,8 +59,6 @@ public class TurfDAO {
 	public void create(TurfEntity newTurf) throws RuntimeException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
-		int generatedId = 0;
 		try {
 			con = ConnectionUtil.getConnection();
 			String query = "INSERT INTO Turf (name , address , area , city , opening_hours , closing_hours) "
