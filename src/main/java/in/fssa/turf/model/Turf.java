@@ -1,5 +1,5 @@
 package in.fssa.turf.model;
 
-public class Turf {
+public class Turf extends TurfEntity {
 
 }

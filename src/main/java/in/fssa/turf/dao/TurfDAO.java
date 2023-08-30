@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import in.fssa.turf.exception.ValidationException;
+import in.fssa.turf.model.Turf;
 import in.fssa.turf.model.TurfEntity;
 import in.fssa.turf.model.UserEntity;
 import in.fssa.turf.util.ConnectionUtil;
@@ -17,19 +18,19 @@ public class TurfDAO {
  * 
  * @return
  */
-	public Set<TurfEntity> findAll() {
+	public Set<Turf> findAll() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Set<TurfEntity> turfList = null;
+		Set<Turf> turfList = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM Turf WHERE is_active = 1";
+			String query = "SELECT id, name, address, area, city, is_active, opening_hours, closing_hours FROM Turf WHERE is_active = 1";
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
-			turfList = new HashSet<TurfEntity>();
+			turfList = new HashSet<Turf>();
 			while (rs.next()) {
-				TurfEntity turf = new TurfEntity();
+				Turf turf = new Turf();
 				turf.setId(rs.getInt("id"));
 				turf.setName(rs.getString("name"));
 				turf.setAddress(rs.getString("address"));
@@ -61,8 +62,7 @@ public class TurfDAO {
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "INSERT INTO Turf (name , address , area , city , opening_hours , closing_hours) "
-					+ "VALUES(? , ? , ? , ? , ? , ?)";
+			String query = "INSERT INTO Turf (name , address , area , city , opening_hours , closing_hours) VALUES(? , ? , ? , ? , ? , ?)";
 			ps = con.prepareStatement(query);
 			ps.setString(1, newTurf.getName());
 			ps.setString(2, newTurf.getAddress());
@@ -164,7 +164,7 @@ public class TurfDAO {
 		TurfEntity turf = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM Turf WHERE is_active = 1 AND id = ?";
+			String query = "SELECT id, name, address, area, city, opening_hours, closing_hours, is_active FROM Turf WHERE is_active = 1 AND id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -203,7 +203,8 @@ public class TurfDAO {
 		TurfEntity turf = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM Turf WHERE is_active = 1 AND area = ?";
+			String query = "SELECT id, name, address, area, city, opening_hours, closing_hours, is_active FROM Turf WHERE is_active = 1 AND area = ?";
+		    ps = con.prepareStatement(query);
 			ps = con.prepareStatement(query);
 			ps.setString(1, area);
 			rs = ps.executeQuery();
@@ -244,7 +245,7 @@ public class TurfDAO {
 		TurfEntity turf = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM Turf WHERE is_active = 1 AND city = ?";
+			String query ="SELECT id, name, address, area, city, opening_hours, closing_hours, is_active FROM Turf WHERE is_active = 1 AND city = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, turfCity);
 			rs = ps.executeQuery();

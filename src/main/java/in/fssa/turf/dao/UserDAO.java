@@ -23,7 +23,7 @@ public class UserDAO {
 		Set<UserEntity> userList = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM User WHERE is_active = 1";
+			String query =  "SELECT id, first_name, last_name, email, area, city, is_active FROM User WHERE is_active = 1";
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
 			userList = new HashSet<UserEntity>();
@@ -163,7 +163,7 @@ public class UserDAO {
 		UserEntity user = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM User WHERE is_active = 1 AND id = ?";
+			String query = "SELECT id, first_name, last_name, area, city, email, password, is_active FROM User WHERE is_active = 1 AND id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -202,7 +202,7 @@ public class UserDAO {
 		UserEntity user = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT * FROM User WHERE is_active = 1 AND email = ?";
+			String query = "SELECT id, first_name, last_name, area, city, email, password, is_active FROM User WHERE is_active = ? AND id = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();

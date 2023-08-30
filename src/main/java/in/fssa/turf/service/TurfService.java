@@ -2,14 +2,17 @@ package in.fssa.turf.service;
 import java.util.Set;
 
 import in.fssa.turf.dao.*;
+import in.fssa.turf.exception.PersistenceException;
+import in.fssa.turf.exception.ServiceException;
 import in.fssa.turf.exception.ValidationException;
+import in.fssa.turf.model.Turf;
 import in.fssa.turf.model.TurfEntity;
 import in.fssa.turf.model.UserEntity;
 import in.fssa.turf.util.StringUtil;
 import in.fssa.turf.validator.TurfValidator;
 import in.fssa.turf.validator.UserValidator;
 
-	public class TurfService {
+	public class TurfService<turfDAO> {
 		/** 
 		 * 
 		 * @param newUser
@@ -25,9 +28,9 @@ import in.fssa.turf.validator.UserValidator;
 			
 		}
 		
-		public Set<TurfEntity> getAll() {
+		public Set<Turf> getAll() {
 			TurfDAO turfDAO = new TurfDAO();
-			Set<TurfEntity> turfArray = turfDAO.findAll();
+			Set<Turf> turfArray = turfDAO.findAll();
 			return turfArray;
 		}
 		
@@ -78,6 +81,12 @@ import in.fssa.turf.validator.UserValidator;
 			 StringUtil.rejectIfInvalidString(turfcity, "turfCity");
 			 TurfDAO turfDAO = new TurfDAO();
 			return turfDAO.findAllByCity(turfcity);
+		}
+		
+		public static TurfEntity findByUserId(int turfId) throws ValidationException, ServiceException, PersistenceException {
+		    TurfValidator.validateForId(turfId);;
+			TurfDAO turfDAO = new TurfDAO();
+			return turfDAO.findById(turfId);
 		}
 		
 		
