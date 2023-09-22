@@ -7,12 +7,12 @@ import in.fssa.turf.exception.ServiceException;
 import in.fssa.turf.exception.ValidationException;
 import in.fssa.turf.model.Turf;
 import in.fssa.turf.model.TurfEntity;
-import in.fssa.turf.model.UserEntity;
+import in.fssa.turf.model.User;
 import in.fssa.turf.util.StringUtil;
 import in.fssa.turf.validator.TurfValidator;
 import in.fssa.turf.validator.UserValidator;
 
-	public class TurfService<turfDAO> {
+	public class TurfService {
 		/** 
 		 * 
 		 * @param newUser
@@ -52,7 +52,7 @@ import in.fssa.turf.validator.UserValidator;
 		 * @param id
 		 * @throws ValidationException
 		 */
-		public void delete(int id) throws ValidationException {
+		public static void delete(int id) throws ValidationException {
 			TurfValidator.validateForId(id);
 			TurfDAO turfDAO = new TurfDAO();
 			turfDAO.delete(id);
@@ -83,10 +83,10 @@ import in.fssa.turf.validator.UserValidator;
 			return turfDAO.findAllByCity(turfcity);
 		}
 		
-		public static TurfEntity findByUserId(int turfId) throws ValidationException, ServiceException, PersistenceException {
+		public static TurfEntity findByTurfId(int turfId) throws ValidationException, ServiceException, PersistenceException {
 		    TurfValidator.validateForId(turfId);;
 			TurfDAO turfDAO = new TurfDAO();
-			return turfDAO.findById(turfId);
+			return turfDAO.findByTurfId(turfId);
 		}
 		
 		

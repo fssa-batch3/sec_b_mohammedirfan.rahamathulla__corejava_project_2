@@ -3,32 +3,32 @@ package in.fssa.app;
 import in.fssa.turf.dao.TurfDAO;
 import in.fssa.turf.exception.ValidationException;
 import in.fssa.turf.model.TurfEntity;
-import in.fssa.turf.model.UserEntity;
+import in.fssa.turf.model.User;
 import in.fssa.turf.service.TurfService;
 import in.fssa.turf.service.UserService;
 
 public class App {
 	public static void main(String[] args) throws ValidationException {
 //		UserService user = new UserService();
-//		UserEntity userentity = new UserEntity();
-//		userentity.setFirstName("santhosh");
-//		userentity.setLastName("narayana");
-//		userentity.setArea("vadalur");
-//		userentity.setCity("kadalur");
-//		userentity.setAddress("nesamani poniya theru");
-//		userentity.setEmailId("santhosh@gmail.com");
-//		userentity.setPassword("Santh@12");
-//		user.create(userentity);
+//		User User = new User();
+//		User.setFirstName("santhosh");
+//		User.setLastName("narayana");
+//		User.setArea("vadalur");
+//		User.setCity("kadalur");
+//		User.setAddress("nesamani poniya theru");
+//		User.setEmailId("santhosh@gmail.com");
+//		User.setPassword("Santh@12");
+//		user.create(User);
 		
 //		UserService user = new UserService();
-//		UserEntity userentity = new UserEntity();
-//		userentity.setFirstName("santhosh");
-//		userentity.setLastName("narayana");
-//		userentity.setArea("vadalur");
-//		userentity.setCity("kadalur");
-//		userentity.setAddress("nesamani poniya theru");
-//		userentity.setPassword("Santh@12");
-//		user.update(1,userentity);
+//		User User = new User();
+//		User.setFirstName("santhosh");
+//		User.setLastName("narayana");
+//		User.setArea("vadalur");
+//		User.setCity("kadalur");
+//		User.setAddress("nesamani poniya theru");
+//		User.setPassword("Santh@12");
+//		user.update(1,User);
 		
 //		UserService us = new UserService();
 //		System.out.println(us.getById(4));

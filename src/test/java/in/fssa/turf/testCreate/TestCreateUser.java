@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import in.fssa.turf.exception.ValidationException;
-import in.fssa.turf.model.UserEntity;
+import in.fssa.turf.model.User;
 import in.fssa.turf.service.UserService;
 
 public class TestCreateUser {
@@ -15,14 +15,14 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithValidData() {
 			UserService userService = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			
-			user.setFirstName("san");
-			user.setLastName("thosh");
-			user.setArea("vadalur");
-			user.setCity("Kadalur");
-			user.setEmailId("irfu1@gmail.com");
-			user.setPassword("Santh@12");
+			user.setFirstName("log");
+			user.setLastName("esh");
+			user.setArea("sathiram");
+			user.setCity("trichy");
+			user.setEmailId("logesh@gmail.com");
+			user.setPassword("Logesh@1");
 			user.setAddress("nesamani poniyar theru");
 			
 			assertDoesNotThrow(() ->{
@@ -45,7 +45,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithFirstNameNull() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			
 			user.setFirstName(null);
 			user.setLastName("thosh");
@@ -68,7 +68,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithFirstNameEmpty() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			
 			user.setFirstName("");
 			user.setLastName("box");
@@ -90,7 +90,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithLastNameNull() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			
 			user.setFirstName("san");
 			user.setLastName(null);
@@ -112,7 +112,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithLastNameEmpty() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			
 			user.setFirstName("san");
 			user.setLastName("");
@@ -133,7 +133,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithnullArea() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("thamim");
 			user.setLastName("subansait");
 			user.setArea(null);
@@ -153,7 +153,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithEmptyArea() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("thamim");
 			user.setLastName("subansait");
 			user.setArea("");
@@ -175,7 +175,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithnullCity() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("mani");
 			user.setLastName("vannan");
 			user.setArea("guduvanchery");
@@ -197,7 +197,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithemptyCity() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("mani");
 			user.setLastName("vannan");
 			user.setArea("guduvanchery");
@@ -218,7 +218,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithIncorrectEmail() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("san");
 			user.setLastName("thosh");
 			user.setArea("vadalur");
@@ -238,7 +238,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithExistingEmail() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("san");
 			user.setLastName("thosh");
 			user.setArea("vadalur");
@@ -257,7 +257,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithemailNull() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("san");
 			user.setLastName("thosh");
 			user.setArea("vadalur");
@@ -276,7 +276,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithemailEmpty() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("san");
 			user.setLastName("thosh");
 			user.setArea("vadalur");
@@ -297,7 +297,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithpasswordNull() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("san");
 			user.setLastName("thosh");
 			user.setArea("vadalur");
@@ -317,7 +317,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithpasswordEmpty() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("san");
 			user.setLastName("thosh");
 			user.setArea("vadalur");
@@ -337,7 +337,7 @@ public class TestCreateUser {
 		@Test
 		public void testCreateUserWithincorrectPassword() {
 			UserService us = new UserService();
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setFirstName("san");
 			user.setLastName("thosh");
 			user.setArea("vadalur");

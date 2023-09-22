@@ -8,6 +8,7 @@ public class TurfEntity  implements Comparable<TurfEntity>{
 		private String city;
 		private String openingHours;
 		private String closingHours;
+		private String image;
 		
 		private boolean isActive = true;
 		
@@ -56,6 +57,13 @@ public class TurfEntity  implements Comparable<TurfEntity>{
 		public void setCity(String city) {
 			this.city = city;
 		}
+		public String getImage() {
+			return image;
+		}
+
+		public void setImage(String image) {
+			this.image = image;
+		}
 		public String getOpeningHours() {
 			return openingHours;
 		}
@@ -73,7 +81,7 @@ public class TurfEntity  implements Comparable<TurfEntity>{
 		@Override
 		public String toString() {
 			return "TurfEntity [id=" + id + ", name=" + name + ", address=" + address + ", address=" + address + ", area=" + area + ", city=" + city
-					+  ", openinghours=" + openingHours + ", closinghours=" + closingHours + ", isActive=" + isActive + "]";
+					+  ", image=" + image + ", openinghours=" + openingHours + ", closinghours=" + closingHours + ", isActive=" + isActive + "]";
 		}
 		
 		@Override

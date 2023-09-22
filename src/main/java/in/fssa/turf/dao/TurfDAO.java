@@ -10,7 +10,7 @@ import java.util.HashSet;
 import in.fssa.turf.exception.ValidationException;
 import in.fssa.turf.model.Turf;
 import in.fssa.turf.model.TurfEntity;
-import in.fssa.turf.model.UserEntity;
+import in.fssa.turf.model.User;
 import in.fssa.turf.util.ConnectionUtil;
 
 public class TurfDAO {
@@ -25,7 +25,7 @@ public class TurfDAO {
 		Set<Turf> turfList = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT id, name, address, area, city, is_active, opening_hours, closing_hours FROM Turf WHERE is_active = 1";
+			String query = "SELECT id, name, address, area, city, image, is_active, opening_hours, closing_hours FROM Turf WHERE is_active = 1";
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
 			turfList = new HashSet<Turf>();
@@ -36,6 +36,7 @@ public class TurfDAO {
 				turf.setAddress(rs.getString("address"));
 				turf.setArea(rs.getString("area"));
 				turf.setCity(rs.getString("city"));
+				turf.setImage(rs.getString("image"));
 				turf.setActive(rs.getBoolean("is_active"));
 				turf.setOpeningHours(rs.getString("opening_hours"));
 				turf.setClosingHours(rs.getString("closing_hours"));
@@ -62,14 +63,15 @@ public class TurfDAO {
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "INSERT INTO Turf (name , address , area , city , opening_hours , closing_hours) VALUES(? , ? , ? , ? , ? , ?)";
+			String query = "INSERT INTO Turf (name , address , area , city , image, opening_hours , closing_hours) VALUES(? , ? , ? , ? , ? , ? , ?)";
 			ps = con.prepareStatement(query);
 			ps.setString(1, newTurf.getName());
 			ps.setString(2, newTurf.getAddress());
 			ps.setString(3, newTurf.getArea());
 			ps.setString(4, newTurf.getCity());
-			ps.setString(5, newTurf.getOpeningHours());
-			ps.setString(6, newTurf.getClosingHours());
+			ps.setString(5, newTurf.getImage());
+			ps.setString(6, newTurf.getOpeningHours());
+			ps.setString(7, newTurf.getClosingHours());
 
 			int rowsAffected = ps.executeUpdate();
 
@@ -157,14 +159,14 @@ public class TurfDAO {
 	 * @param id
 	 * @return
 	 */
-	public TurfEntity findById(int id) {
+	public TurfEntity findByTurfId(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		TurfEntity turf = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT id, name, address, area, city, opening_hours, closing_hours, is_active FROM Turf WHERE is_active = 1 AND id = ?";
+			String query = "SELECT id, name, address, area, city, opening_hours, closing_hours, is_active , image FROM Turf WHERE is_active = 1 AND id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -178,6 +180,7 @@ public class TurfDAO {
 				turf.setOpeningHours(rs.getString("opening_hours"));
 				turf.setClosingHours(rs.getString("closing_hours"));
 				turf.setActive(rs.getBoolean("is_active"));
+				turf.setImage(rs.getString("image"));
 			}
 
 		} catch (SQLException e) {
@@ -274,8 +277,35 @@ public class TurfDAO {
 		return turfs;
 	}
 
+	
+	public static int id(int id) {
+		
+	
+	int targetId = 123; // Replace with the actual ID you want to delete
 
+	Connection con = ConnectionUtil.getConnection();
 
+    try  {
+    	
+        String deleteQuery = "DELETE FROM Locations WHERE ID = ?";
+        
+        try (PreparedStatement preparedStatement = con.prepareStatement(deleteQuery)) {
+            preparedStatement.setInt(1, targetId);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                System.out.println("Row deleted successfully.");
+            } else {
+                System.out.println("No rows deleted.");
+            } 
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+	return targetId; 
+	
+}
 
 
 }

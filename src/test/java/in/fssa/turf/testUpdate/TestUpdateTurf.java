@@ -17,8 +17,10 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmi nagar");
 				turf.setArea("vadalur");
 				turf.setCity("Kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
+				
 				
 				assertDoesNotThrow(() ->{
 					turfService.update(1,turf);
@@ -46,6 +48,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmi nagar");
 				turf.setArea("vadalur");
 				turf.setCity("Kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
 				
@@ -68,6 +71,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mm nagar");
 				turf.setArea("saidapet");
 				turf.setCity("chennai");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
 				
@@ -88,6 +92,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmi nagar");
 				turf.setArea("vadalur");
 				turf.setCity("Kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
 				
@@ -108,6 +113,7 @@ public class TestUpdateTurf {
 				turf.setAddress("");
 				turf.setArea("vadalur");
 				turf.setCity("Kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
 				
@@ -129,6 +135,7 @@ public class TestUpdateTurf {
 				turf.setAddress(null);
 				turf.setArea("pallavaram");
 				turf.setCity("chennai");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("10.00AM");
 				turf.setClosingHours("9.00PM");
 				
@@ -150,6 +157,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmin nagar");
 				turf.setArea("");
 				turf.setCity("Kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
 				
@@ -170,6 +178,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmin nagar");
 				turf.setArea("");
 				turf.setCity("Kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
 
@@ -191,6 +200,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmin nagar");
 				turf.setArea("vadalur");
 				turf.setCity(null);
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("9.00PM");
 
@@ -211,6 +221,7 @@ public class TestUpdateTurf {
 				turf.setAddress("kamaraj nagar");
 				turf.setArea("avadi");
 				turf.setCity("");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("8.00AM");
 				turf.setClosingHours("8.00PM");
 				
@@ -222,7 +233,48 @@ public class TestUpdateTurf {
 				String m2 = excp.getMessage();
 				assertTrue(m1.equals(m2));
 			}
-			
+			@Test
+			public void testCreateTurfWithemptyImage() {
+				TurfService tu = new TurfService();
+				TurfEntity turf = new TurfEntity();
+				turf.setName("san");
+				turf.setAddress("mahalakshmin nagar");
+				turf.setArea("vadalur");
+				turf.setCity("kadalur");
+				turf.setImage("");
+				turf.setOpeningHours("9.00AM");
+				turf.setClosingHours("9.00PM");
+				
+				
+				Exception excp = assertThrows(ValidationException.class , () ->{
+					tu.create(turf);
+				});
+				String m1 = "image cannot be null or empty";
+				String m2 = excp.getMessage();
+				System.out.println(m2);
+				assertTrue(m1.equals(m2));
+			}
+			@Test
+			public void testCreateTurfWithNullImage() {
+				TurfService tu = new TurfService();
+				TurfEntity turf = new TurfEntity();
+				turf.setName("san");
+				turf.setAddress("mahalakshmin nagar");
+				turf.setArea("vadalur");
+				turf.setCity("kadalur");
+				turf.setImage(null);
+				turf.setOpeningHours("9.00AM");
+				turf.setClosingHours("9.00PM");
+				
+				
+				Exception excp = assertThrows(ValidationException.class , () ->{
+					tu.create(turf);
+				});
+				String m1 = "image cannot be null or empty";
+				String m2 = excp.getMessage();
+				System.out.println(m2);
+				assertTrue(m1.equals(m2));
+			}
 			@Test
 			public void testCreateTurfWithemptyOpeningHours() {
 				TurfService tu = new TurfService();
@@ -231,6 +283,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmin nagar");
 				turf.setArea("vadalur");
 				turf.setCity("kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("");
 				turf.setClosingHours("9.00PM");
 				
@@ -250,6 +303,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmin nagar");
 				turf.setArea("vadalur");
 				turf.setCity("kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours(null);
 				turf.setClosingHours("9.00PM");
 				
@@ -269,6 +323,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmin nagar");
 				turf.setArea("vadalur");
 				turf.setCity("kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours("");
 				
@@ -288,6 +343,7 @@ public class TestUpdateTurf {
 				turf.setAddress("mahalakshmin nagar");
 				turf.setArea("vadalur");
 				turf.setCity("kadalur");
+				turf.setImage("https://wallpapers.com/images/hd/virat-kohli-in-sunglasses-yc8dfpcjssp3s4se.jpg");
 				turf.setOpeningHours("9.00AM");
 				turf.setClosingHours(null);
 

@@ -24,10 +24,12 @@ import in.fssa.turf.model.*;
 				throw new ValidationException("id cannot be negative");
 			}
 			
+			
 			StringUtil.rejectIfInvalidString(turf.getName(), "name");
 			StringUtil.rejectIfInvalidString(turf.getAddress(), "address");
 			StringUtil.rejectIfInvalidString(turf.getArea(), "area");
 			StringUtil.rejectIfInvalidString(turf.getCity(), "city");
+			StringUtil.rejectIfInvalidString(turf.getImage(), "image");
 			StringUtil.rejectIfInvalidString(turf.getOpeningHours(), "opening hours");
 			StringUtil.rejectIfInvalidString(turf.getClosingHours(), "closing hours");		
 		}
@@ -48,7 +50,7 @@ import in.fssa.turf.model.*;
 			
 			
 			TurfDAO turfDao = new TurfDAO();
-			TurfEntity turf1 = turfDao.findById(id);
+			TurfEntity turf1 = turfDao.findByTurfId(id);
 			if(turf1==null) {
 				throw new ValidationException("Turf doesn't exists");
 			}
@@ -57,6 +59,7 @@ import in.fssa.turf.model.*;
 			StringUtil.rejectIfInvalidString(turf.getAddress(), "address");
 			StringUtil.rejectIfInvalidString(turf.getArea(), "area");
 			StringUtil.rejectIfInvalidString(turf.getCity(), "city");
+			StringUtil.rejectIfInvalidString(turf.getImage(), "image");
 			StringUtil.rejectIfInvalidString(turf.getOpeningHours(), "opening hours");
 			StringUtil.rejectIfInvalidString(turf.getClosingHours(), "closing hours");
 			
@@ -71,7 +74,7 @@ import in.fssa.turf.model.*;
 				throw new ValidationException("id cannot be negative");
 			}
 			TurfDAO turfDAO = new TurfDAO();
-			TurfEntity turf1 = turfDAO.findById(id);
+			TurfEntity turf1 = turfDAO.findByTurfId(id);
 			if(turf1==null) {
 				throw new ValidationException("Turf doesn't exists");
 			}

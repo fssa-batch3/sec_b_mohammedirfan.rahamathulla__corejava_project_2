@@ -3,7 +3,7 @@ import java.util.Set;
 
 import in.fssa.turf.dao.*;
 import in.fssa.turf.exception.ValidationException;
-import in.fssa.turf.model.UserEntity;
+import in.fssa.turf.model.User;
 import in.fssa.turf.validator.UserValidator;
 
 	public class UserService {
@@ -12,7 +12,7 @@ import in.fssa.turf.validator.UserValidator;
 	 * @param newUser
 	 * @throws ValidationException
 	 */
-		public void create(UserEntity newUser) throws ValidationException{
+		public void create(User newUser) throws ValidationException{
 			
 			 UserValidator.validateForCreate(newUser);
 			
@@ -22,9 +22,9 @@ import in.fssa.turf.validator.UserValidator;
 			
 		}
 		
-		public Set<UserEntity> getAll() {
+		public Set<User> getAll() {
 			UserDAO userDAO = new UserDAO();
-			Set<UserEntity> userArray = userDAO.findAll();
+			Set<User> userArray = userDAO.findAll();
 			return userArray;
 		}
 		/** 
@@ -34,7 +34,7 @@ import in.fssa.turf.validator.UserValidator;
 		 * @throws ValidationException
 		 */
 		
-		public static void update(int id , UserEntity  newUser) throws ValidationException {
+		public static void update(int id , User  newUser) throws ValidationException {
 			 UserValidator.validateForUpdate(id , newUser);
 			UserDAO userDAO = new UserDAO();
 			
@@ -56,7 +56,7 @@ import in.fssa.turf.validator.UserValidator;
 		 * @return
 		 * @throws ValidationException
 		 */
-		public static UserEntity getById(int userId) throws ValidationException {
+		public static User getById(int userId) throws ValidationException {
 			 UserValidator.validateForId(userId);
 			UserDAO userDAO = new UserDAO();
 			return userDAO.findById(userId);
@@ -69,10 +69,9 @@ import in.fssa.turf.validator.UserValidator;
 		 * @throws ValidationException
 		 */
 		
-		public static UserEntity getByEmail(String email) throws ValidationException{
+		public static User getByEmail(String email) throws ValidationException{
 			 UserValidator.validateForEmail(email);
 			UserDAO userDAO = new UserDAO();
 			return userDAO.findByEmail(email);
 		}
 	}
-

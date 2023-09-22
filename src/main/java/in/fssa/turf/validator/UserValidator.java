@@ -16,7 +16,7 @@ import in.fssa.turf.model.*;
 		 * @param user
 		 * @throws ValidationException
 		 */
-		public static void validateForCreate(UserEntity user) throws ValidationException {
+		public static void validateForCreate(User user) throws ValidationException {
 			if(user == null) {
 				throw new ValidationException("User cannot be null");
 			}
@@ -28,7 +28,7 @@ import in.fssa.turf.model.*;
 			
 			
 			UserDAO userDao = new UserDAO();
-			UserEntity user1 = userDao.findByEmail(user.getEmailId());
+			User user1 = userDao.findByEmail(user.getEmailId());
 			if(user1!=null) {
 				throw new ValidationException("User already exists");
 			}
@@ -66,7 +66,7 @@ import in.fssa.turf.model.*;
 		 * @param user
 		 * @throws ValidationException
 		 */
-		public static void validateForUpdate(int id,UserEntity user) throws ValidationException{
+		public static void validateForUpdate(int id,User user) throws ValidationException{
 			if(user == null) {
 				throw new ValidationException("user cannot be null");
 			}
@@ -76,7 +76,7 @@ import in.fssa.turf.model.*;
 			
 			
 			UserDAO userDao = new UserDAO();
-			UserEntity user1 = userDao.findById(id);
+			User user1 = userDao.findById(id);
 			if(user1==null) {
 				throw new ValidationException("User doesn't exists");
 			}
@@ -109,7 +109,7 @@ import in.fssa.turf.model.*;
 				throw new ValidationException("id cannot be negative");
 			}
 			UserDAO userDao = new UserDAO();
-			UserEntity user1 = userDao.findById(id);
+			User user1 = userDao.findById(id);
 			if(user1==null) {
 				throw new ValidationException("User doesn't exists");
 			}

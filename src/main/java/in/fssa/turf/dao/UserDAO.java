@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import in.fssa.turf.exception.ValidationException;
-import in.fssa.turf.model.UserEntity;
+import in.fssa.turf.model.User;
 import in.fssa.turf.util.ConnectionUtil;
 
 public class UserDAO {
@@ -16,19 +16,19 @@ public class UserDAO {
 	 * 
 	 * @return
 	 */
-	public Set<UserEntity> findAll() {
+	public Set<User> findAll() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Set<UserEntity> userList = null;
+		Set<User> userList = null;
 		try {
 			con = ConnectionUtil.getConnection();
 			String query =  "SELECT id, first_name, last_name, email, area, city, is_active FROM User WHERE is_active = 1";
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
-			userList = new HashSet<UserEntity>();
+			userList = new HashSet<User>();
 			while (rs.next()) {
-				UserEntity user = new UserEntity();
+				User user = new User();
 				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
@@ -54,7 +54,7 @@ public class UserDAO {
     * @param newUser
     * @throws RuntimeException
     */
-	public void create(UserEntity newUser) throws RuntimeException {
+	public void create(User newUser) throws RuntimeException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -94,7 +94,7 @@ public class UserDAO {
 	 * @param id
 	 * @param newUser
 	 */
-	public void update(int id, UserEntity newUser) {
+	public void update(int id, User newUser) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
@@ -156,11 +156,11 @@ public class UserDAO {
 	 * @param id
 	 * @return
 	 */
-	public UserEntity findById(int id) {
+	public User findById(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		UserEntity user = null;
+		User user = null;
 		try {
 			con = ConnectionUtil.getConnection();
 			String query = "SELECT id, first_name, last_name, area, city, email, password, is_active FROM User WHERE is_active = 1 AND id = ?";
@@ -168,7 +168,7 @@ public class UserDAO {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				user = new UserEntity();
+				user = new User();
 				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
@@ -195,19 +195,19 @@ public class UserDAO {
 	 * @param email
 	 * @return
 	 */
-	public UserEntity findByEmail(String email) {
+	public User findByEmail(String email) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		UserEntity user = null;
+		User user = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT id, first_name, last_name, area, city, email, password, is_active FROM User WHERE is_active = ? AND id = ?";
+			String query = "SELECT id, first_name, last_name, area, city, email, password, is_active FROM User WHERE is_active = 1 AND email = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				user = new UserEntity();
+				user = new User();
 				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
@@ -216,6 +216,7 @@ public class UserDAO {
 				user.setEmailId(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setActive(rs.getBoolean("is_active"));
+				System.out.println(user);
 			}
 
 		} catch (SQLException e) {
