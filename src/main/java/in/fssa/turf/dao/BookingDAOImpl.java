@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import in.fssa.turf.model.Booking;
 import in.fssa.turf.model.TurfEntity;
@@ -22,32 +24,34 @@ public class BookingDAOImpl implements BookingDAO {
         // Implement finding by ID
     }
 
+   
     @Override
-    public List<Booking> findAll() {
-    	
+    public List<Booking> findAllByEmail(String email) {
         List<Booking> bookings = new ArrayList<>();
-        try {
-        	connection = ConnectionUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Bookings");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Booking booking = new Booking();
-                booking.setId(resultSet.getInt("id"));
-                booking.setUseremail(resultSet.getString("useremail"));
-                booking.setTurfid(resultSet.getInt("turfid"));
-                booking.setGameDate(resultSet.getDate("game_date").toLocalDate());
-                booking.setOpeninghours(resultSet.getString("openinghours"));
-                booking.setClosinghours(resultSet.getString("closinghours"));
-                booking.setStatus(resultSet.getString("Status"));
-                booking.setCreated_at(resultSet.getTimestamp("created_at").toLocalDateTime());
-                booking.setModified_at(resultSet.getTimestamp("modified_at").toLocalDateTime());
-                bookings.add(booking);
+        try (Connection con = ConnectionUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement("SELECT * FROM Bookings WHERE Useremail = ?")) {
+            ps.setString(1, email); 
+            try (ResultSet resultSet = ps.executeQuery()) {
+                while (resultSet.next()) {
+                    Booking booking = new Booking();
+                    booking.setId(resultSet.getInt("id"));
+                    booking.setUseremail(resultSet.getString("useremail"));
+                    booking.setTurfid(resultSet.getInt("turfid"));
+                    booking.setGameDate(resultSet.getDate("game_date").toLocalDate());
+                    booking.setOpeninghours(resultSet.getString("openinghours"));
+                    booking.setClosinghours(resultSet.getString("closinghours"));
+                    booking.setStatus(resultSet.getString("Status"));
+                    booking.setCreated_at(resultSet.getTimestamp("created_at").toLocalDateTime());
+                    booking.setModified_at(resultSet.getTimestamp("modified_at").toLocalDateTime());
+                    bookings.add(booking);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return bookings;
     }
+
 
 	@Override
 	public void save(Booking booking) {
@@ -153,14 +157,18 @@ public class BookingDAOImpl implements BookingDAO {
 
 	  @Override
 	    public List<Booking> findUserBookings(int userId) {
-	    	
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		 ResultSet resultSet = null;
+		
 	        List<Booking> bookings = new ArrayList<>();
 	        try {
 	        	connection = ConnectionUtil.getConnection();
 	        	
-	            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Bookings WHERE userId=?");
+	             statement = connection.prepareStatement("SELECT * FROM Bookings WHERE userId=?");
 	            
-	            ResultSet resultSet = statement.executeQuery();
+	             resultSet = statement.executeQuery();
 	            
 	            while (resultSet.next()) {
 	                Booking booking = new Booking();
@@ -177,17 +185,60 @@ public class BookingDAOImpl implements BookingDAO {
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	        }
-	        return bookings;
+	        }  finally {
+				ConnectionUtil.close(connection, statement, resultSet); 
 	    }
+	        return bookings;
 
 
+	  }
+	  public List<Booking> findByEmail(String userEmail) {
+	    	
+            List<Booking> bookings = new ArrayList<>();
+
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet resultSet = null;
+	        try {
+	        	con = ConnectionUtil.getConnection();
+	        	ps = con.prepareStatement("SELECT * FROM Bookings Where Useremail = ?");
+	        	resultSet = ps.executeQuery();
+	            while (resultSet.next()) {
+	                Booking booking = new Booking();
+	                booking.setId(resultSet.getInt("id"));
+	                booking.setUseremail(resultSet.getString("useremail"));
+	                booking.setTurfid(resultSet.getInt("turfid"));
+	                booking.setGameDate(resultSet.getDate("game_date").toLocalDate());
+	                booking.setOpeninghours(resultSet.getString("openinghours"));
+	                booking.setClosinghours(resultSet.getString("closinghours"));
+	                booking.setStatus(resultSet.getString("Status"));
+	                booking.setCreated_at(resultSet.getTimestamp("created_at").toLocalDateTime());
+	                booking.setModified_at(resultSet.getTimestamp("modified_at").toLocalDateTime());
+	                bookings.add(booking);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+					ConnectionUtil.close(con, ps, resultSet); 
+	        }
+			return bookings;
+	  }
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		
 	}
 
-    // Implement save, update, delete methods
-}
+	@Override
+	public List<Booking> findUserEmail(String userEmail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Booking> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	  }
 

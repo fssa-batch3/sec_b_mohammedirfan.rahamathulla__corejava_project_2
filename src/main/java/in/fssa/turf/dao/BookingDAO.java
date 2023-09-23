@@ -12,5 +12,7 @@ public interface BookingDAO {
     void delete(int id);
 	void updatestatus(int bookingid, String status);
 	List<Booking> findUserBookings(int userId);
+	List<Booking> findUserEmail(String userEmail);
+	List<Booking> findAllByEmail(String email);
 }
 

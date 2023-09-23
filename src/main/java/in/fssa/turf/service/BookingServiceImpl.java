@@ -5,6 +5,7 @@ import java.util.List;
 import in.fssa.turf.dao.BookingDAO;
 import in.fssa.turf.dao.BookingDAOImpl;
 import in.fssa.turf.model.Booking;
+import in.fssa.turf.model.User;
 
 public class BookingServiceImpl implements BookingService {
 
@@ -20,8 +21,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> getAllBookings() {
-        return bookingDAO.findAll();
+    public List<Booking> getAllBookings(String email) {
+        return bookingDAO.findAllByEmail(email);
     }
 
     @Override
@@ -53,4 +54,18 @@ public class BookingServiceImpl implements BookingService {
     public void updateBookingStatus(int bookingid, String status) {
         bookingDAO.updatestatus(bookingid, status);
     }
+    public List<Booking> findUserBookings(int userid) {
+        return bookingDAO.findUserBookings(userid);
+  
+    }
+    public List<Booking> findUserEmail(String userEmail) {
+        return bookingDAO.findUserEmail(userEmail);
+  
+    }
+
+	@Override
+	public List<Booking> getAllBookings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
