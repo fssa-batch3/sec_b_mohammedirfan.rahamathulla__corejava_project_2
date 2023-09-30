@@ -63,7 +63,7 @@ public class TurfDAO {
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "INSERT INTO Turf (name , address , area , city , image, opening_hours , closing_hours) VALUES(? , ? , ? , ? , ? , ? , ?)";
+			String query = "INSERT INTO Turf (name , address , area , city , image, opening_hours , closing_hours, turfownerid) VALUES(? , ? , ? , ? , ? , ? , ? , ?)";
 			ps = con.prepareStatement(query);
 			ps.setString(1, newTurf.getName());
 			ps.setString(2, newTurf.getAddress());
@@ -72,6 +72,7 @@ public class TurfDAO {
 			ps.setString(5, newTurf.getImage());
 			ps.setString(6, newTurf.getOpeningHours());
 			ps.setString(7, newTurf.getClosingHours());
+			ps.setInt(8, newTurf.getTurfownerid());
 
 			int rowsAffected = ps.executeUpdate();
 
@@ -306,6 +307,44 @@ public class TurfDAO {
 	return targetId; 
 	
 }
+	
+	public Set<Turf> findByTurfOwnerId(int turfownerid) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Set<Turf> turfList = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String query = "SELECT id, name, address, area, city, image, is_active, opening_hours, closing_hours FROM Turf WHERE is_active = 1 and turfownerid = ? ";
+			ps = con.prepareStatement(query);
+			rs = ps.executeQuery();
+			ps.setInt(1, turfownerid);
+			turfList = new HashSet<Turf>();
+			while (rs.next()) {
+				Turf turf = new Turf();
+				turf.setId(rs.getInt("id"));
+				turf.setName(rs.getString("name"));
+				turf.setAddress(rs.getString("address"));
+				turf.setArea(rs.getString("area"));
+				turf.setCity(rs.getString("city"));
+				turf.setImage(rs.getString("image"));
+				turf.setActive(rs.getBoolean("is_active"));
+				turf.setOpeningHours(rs.getString("opening_hours"));
+				turf.setClosingHours(rs.getString("closing_hours"));
+
+				turfList.add(turf);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		} finally {
+			ConnectionUtil.close(con, ps, rs);
+		}
+
+		return turfList;
+	}
+
 
 
 }

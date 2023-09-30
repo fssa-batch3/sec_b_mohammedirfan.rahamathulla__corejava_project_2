@@ -89,7 +89,10 @@ import in.fssa.turf.validator.UserValidator;
 			return turfDAO.findByTurfId(turfId);
 		}
 		
-		
+		public static Set<Turf> findByTurfOwnerId(int turfownerid) throws ValidationException, ServiceException, PersistenceException {
+			TurfDAO turfDAO = new TurfDAO();
+			return turfDAO.findByTurfOwnerId(turfownerid);
+		}
 		
 	}
 	

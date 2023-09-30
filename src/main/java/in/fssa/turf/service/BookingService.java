@@ -15,5 +15,6 @@ public interface BookingService {
 	void saveBooking1(Booking booking);
 	void updateBookingStatus(int bookingid, String status);
 	List<Booking> getAllBookings(String email);
+	List<Booking> getAllBookings(int id);
 }
 

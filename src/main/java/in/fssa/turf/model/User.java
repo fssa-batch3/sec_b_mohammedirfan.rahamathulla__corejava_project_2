@@ -7,9 +7,6 @@ public class User implements Comparable<User>{
 	private String lastName;
 	private String email;
 	private String password;
-	private String address;
-	private String area;
-	private String city;
 
 	private boolean isActive = true;
 
@@ -60,31 +57,7 @@ public class User implements Comparable<User>{
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
+	
 	public String fullName() {
 		return firstName.concat(" ").concat(lastName);
 	}
@@ -92,8 +65,7 @@ public class User implements Comparable<User>{
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", address=" + address + ", area=" + area + ", city=" + city
-				+ ", isActive=" + isActive + "]";
+				+ ", password=" + password + ", isActive=" + isActive + "]";
 	}
 
 	@Override

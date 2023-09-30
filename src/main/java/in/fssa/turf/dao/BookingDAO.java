@@ -14,5 +14,6 @@ public interface BookingDAO {
 	List<Booking> findUserBookings(int userId);
 	List<Booking> findUserEmail(String userEmail);
 	List<Booking> findAllByEmail(String email);
+	List<Booking> findAllById(int id);
 }
 

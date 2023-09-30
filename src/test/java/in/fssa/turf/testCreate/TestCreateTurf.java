@@ -2,8 +2,12 @@ package in.fssa.turf.testCreate;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 import in.fssa.turf.exception.ValidationException;
+import in.fssa.turf.model.Turf;
 import in.fssa.turf.model.TurfEntity;
 import in.fssa.turf.service.TurfService;
 
@@ -299,6 +303,14 @@ public class TestCreateTurf {
 				assertDoesNotThrow(() -> {
 					TurfService turfService = new TurfService();
 					TurfEntity turf = TurfService.findByTurfId(18);
+					System.out.println(turf);
+				});
+			}
+			@Test
+			public void testGetTurfOwnerById() {
+				assertDoesNotThrow(() -> {
+					TurfService turfService = new TurfService();
+					Set<Turf> turf = TurfService.findByTurfOwnerId(14);
 					System.out.println(turf);
 				});
 			}

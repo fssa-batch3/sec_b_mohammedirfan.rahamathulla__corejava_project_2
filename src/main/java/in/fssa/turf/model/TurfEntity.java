@@ -9,7 +9,16 @@ public class TurfEntity  implements Comparable<TurfEntity>{
 		private String openingHours;
 		private String closingHours;
 		private String image;
+		private int turfownerid;
 		
+		public int getTurfownerid() {
+			return turfownerid;
+		}
+
+		public void setTurfownerid(int turfownerid) {
+			this.turfownerid = turfownerid;
+		}
+
 		private boolean isActive = true;
 		
 		public Integer getId() {
@@ -80,8 +89,9 @@ public class TurfEntity  implements Comparable<TurfEntity>{
 		}
 		@Override
 		public String toString() {
-			return "TurfEntity [id=" + id + ", name=" + name + ", address=" + address + ", address=" + address + ", area=" + area + ", city=" + city
-					+  ", image=" + image + ", openinghours=" + openingHours + ", closinghours=" + closingHours + ", isActive=" + isActive + "]";
+			return "TurfEntity [id=" + id + ", name=" + name + ", address=" + address + ", area=" + area + ", city="
+					+ city + ", openingHours=" + openingHours + ", closingHours=" + closingHours + ", image=" + image
+					+ ", turfownerid=" + turfownerid + ", isActive=" + isActive + "]";
 		}
 		
 		@Override

@@ -7,46 +7,43 @@ import in.fssa.turf.exception.ValidationException;
 import in.fssa.turf.util.StringUtil;
 import in.fssa.turf.dao.*;
 import in.fssa.turf.model.*;
+import in.fssa.turf.service.TurfOwnerService;
 
 
 	
-	public class UserValidator {
+	public class TurfOwnerValidator {
 		/** 
 		 * 
 		 * @param user
 		 * @throws ValidationException
 		 */
-		public static void validateForCreate(User user) throws ValidationException {
-			if(user == null) {
-				throw new ValidationException("User cannot be null");
+		public static void validateForCreate(TurfOwner turfowner) throws ValidationException {
+			if(turfowner == null) {
+				throw new ValidationException("TurfOwner cannot be null");
 			}
-			if(user.getId()<0) {
+			if(turfowner.getId()<0) {
 				throw new ValidationException("id cannot be negative");
 			}
 			
-			
-			
-			
-			UserDAO userDao = new UserDAO();
-			User user1 = userDao.findByEmail(user.getEmailId());
-			if(user1!=null) {
-				throw new ValidationException("User already exists");
-			}
-			
-			StringUtil.rejectIfInvalidString(user.getFirstName(), "first name");
-			StringUtil.rejectIfInvalidString(user.getEmailId(), "email");
-			StringUtil.rejectIfInvalidString(user.getPassword(), "password");
-			StringUtil.rejectIfInvalidString(user.getLastName(), "last name");
+			StringUtil.rejectIfInvalidString(turfowner.getName(), "name");
+			StringUtil.rejectIfInvalidString(turfowner.getEmail(), "email");
+			StringUtil.rejectIfInvalidString(turfowner.getPassword(), "password");
 			
 			Pattern ptn2 = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
-			Matcher mtch2 = ptn2.matcher(user.getEmailId());
+			Matcher mtch2 = ptn2.matcher(turfowner.getEmail());
 			if(mtch2.matches()==false) {
 				throw new ValidationException("email doesn't match the required format");
 			}
 			
+			TurfOwnerDAO turfOwnerDAO = new TurfOwnerDAO();
+			TurfOwner turfowner1 = turfOwnerDAO.findByEmail(turfowner.getEmail());
+			if(turfowner1!=null) {
+				throw new ValidationException("Turfowner already exists");
+			}
+			
 			String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^*&+=])(?=\\S+$).{8,}$";
 	        Pattern compiledPattern = Pattern.compile(pattern);
-	        Matcher matcher = compiledPattern.matcher(user.getPassword());
+	        Matcher matcher = compiledPattern.matcher(turfowner.getPassword());
 
 	        if (!matcher.matches()) {
 	            throw new ValidationException("Password doesn't match the required format");
@@ -60,28 +57,28 @@ import in.fssa.turf.model.*;
 		 * @param user
 		 * @throws ValidationException
 		 */
-		public static void validateForUpdate(int id,User user) throws ValidationException{
-			if(user == null) {
-				throw new ValidationException("user cannot be null");
+		public static void validateForUpdate(int id,TurfOwnerService turfowner) throws ValidationException{
+			if(turfowner == null) {
+				throw new ValidationException("turfowner cannot be null");
 			}
-			if(user.getId()<0) {
+			if(turfowner.getId()<0) {
 				throw new ValidationException("id cannot be negative");
 			}
 			
 			
-			UserDAO userDao = new UserDAO();
-			User user1 = userDao.findById(id);
-			if(user1==null) {
-				throw new ValidationException("User doesn't exists");
+			TurfOwnerDAO turfOwnerDAO = new TurfOwnerDAO();
+			TurfOwner turfowner1 = turfOwnerDAO.findById(id);
+			if(turfowner1==null) {
+				throw new ValidationException("TurfOwner doesn't exists");
 			}
 			
-			StringUtil.rejectIfInvalidString(user.getPassword(), "password");
-			StringUtil.rejectIfInvalidString(user.getFirstName(), "first name");
-			StringUtil.rejectIfInvalidString(user.getLastName(), "last name");
+			StringUtil.rejectIfInvalidString(turfowner1.getName(), "name");
+			StringUtil.rejectIfInvalidString(turfowner1.getEmail(), "email");
+			StringUtil.rejectIfInvalidString(turfowner1.getPassword(), "password");
 			
 			String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^*&+=])(?=\\S+$).{8,}$";
 	        Pattern compiledPattern = Pattern.compile(pattern);
-	        Matcher matcher = compiledPattern.matcher(user.getPassword());
+	        Matcher matcher = compiledPattern.matcher(turfowner1.getPassword());
 
 	        if (!matcher.matches()) {
 	            throw new ValidationException("Password doesn't match the required format");
@@ -96,10 +93,10 @@ import in.fssa.turf.model.*;
 			if(id <=0) {
 				throw new ValidationException("id cannot be negative");
 			}
-			UserDAO userDao = new UserDAO();
-			User user1 = userDao.findById(id);
-			if(user1==null) {
-				throw new ValidationException("User doesn't exists");
+			TurfOwnerDAO turfOwnerDAO = new TurfOwnerDAO();
+			TurfOwner turfowner1 = turfOwnerDAO.findById(id);
+			if(turfowner1==null) {
+				throw new ValidationException("Turfowner doesn't exists");
 			}
 			
 		}

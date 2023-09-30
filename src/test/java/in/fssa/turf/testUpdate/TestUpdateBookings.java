@@ -21,7 +21,7 @@ public class TestUpdateBookings {
 		booking.setId(4);
 		booking.setUseremail("naresh@gmail.com");
 		booking.setTurfid(8);
-		booking.setGameDate(LocalDate.now());
+		 booking.setGameDate(java.time.LocalDate.now().toString());
 		booking.setOpeninghours("16.56");
 		booking.setClosinghours("19.54");
 		booking.setStatus("CANCELLED");

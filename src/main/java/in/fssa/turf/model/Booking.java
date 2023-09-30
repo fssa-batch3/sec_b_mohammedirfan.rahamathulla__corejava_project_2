@@ -17,15 +17,15 @@ public class Booking {
     private String openinghours;
     private String closinghours;
     private String status;
-    public LocalDate getGameDate() {
+    public String getGameDate() {
 		return gameDate;
 	}
 
-	public void setGameDate(LocalDate gameDate) {
-		this.gameDate = gameDate;
+	public void setGameDate(String string) {
+		this.gameDate = string;
 	}
 
-	private LocalDate gameDate;
+	private String gameDate;
     private LocalDateTime created_at;
     private LocalDateTime modified_at;
 

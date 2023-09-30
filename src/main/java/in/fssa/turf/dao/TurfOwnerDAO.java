@@ -8,34 +8,35 @@ import java.util.Set;
 import java.util.HashSet;
 
 import in.fssa.turf.exception.ValidationException;
-import in.fssa.turf.model.User;
+import in.fssa.turf.model.TurfOwner;
+import in.fssa.turf.service.TurfOwnerService;
 import in.fssa.turf.util.ConnectionUtil;
 
-public class UserDAO {
-	/**
+public class TurfOwnerDAO {
+	/*
 	 * 
 	 * @return
 	 */
-	public Set<User> findAll() {
+	public Set<TurfOwner> findAll() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Set<User> userList = null;
+		Set<TurfOwner> turfOwnerList = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query =  "SELECT id, first_name, last_name, email, is_active FROM User WHERE is_active = 1";
+			String query = "SELECT id, first_name, last_name, email, is_active FROM TurfOwner WHERE is_active = 1";
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
-			userList = new HashSet<User>();
+			turfOwnerList = new HashSet<TurfOwner>();
 			while (rs.next()) {
-				User user = new User();
-				user.setId(rs.getInt("id"));
-				user.setFirstName(rs.getString("first_name"));
-				user.setLastName(rs.getString("last_name"));
-				user.setEmailId(rs.getString("email"));
-				user.setActive(rs.getBoolean("is_active"));
+				TurfOwner turfowner = new TurfOwner();
+				turfowner.setId(rs.getInt("id"));
+				turfowner.setName(rs.getString("name"));
+				turfowner.setEmail(rs.getString("email"));
+				turfowner.setPassword(rs.getString("password"));
+				turfowner.setActive(rs.getBoolean("is_active"));
 
-				userList.add(user);
+				turfOwnerList.add(turfowner);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,36 +46,34 @@ public class UserDAO {
 			ConnectionUtil.close(con, ps, rs);
 		}
 
-		return userList;
+		return turfOwnerList;
 	}
-   /**
-    * 
-    * @param newUser
-    * @throws RuntimeException
-    */
-	public void create(User newUser) throws RuntimeException {
+
+	/**
+	 * 
+	 * @param newUser
+	 * @throws RuntimeException
+	 */
+	public void create(TurfOwner newTurfOwner) throws RuntimeException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		int generatedId = 0;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "INSERT INTO User (email , password , first_name , last_name ) "
-					+ "VALUES(? , ? , ? , ?)";
+			String query = "INSERT INTO TurfOwner (name , email , password) " + "VALUES(? , ? , ? )";
 			ps = con.prepareStatement(query);
-			ps.setString(1, newUser.getEmailId());
-			ps.setString(2, newUser.getPassword());
-			ps.setString(3, newUser.getFirstName());
-			ps.setString(4, newUser.getLastName());
+			ps.setString(1, newTurfOwner.getName());
+			ps.setString(2, newTurfOwner.getEmail());
+			ps.setString(3, newTurfOwner.getPassword());
 
 			int rowsAffected = ps.executeUpdate();
 
 			if (rowsAffected > 0) {
-				System.out.println("User had been created successfully");
+				System.out.println("Turfowner had been created successfully");
 			} else {
-				throw new RuntimeException("User had not been created successfully");
+				throw new RuntimeException("Turfowner had not been created successfully");
 			}
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,27 +84,27 @@ public class UserDAO {
 		}
 	}
 
-	/** 
+	/**
 	 * 
 	 * @param id
 	 * @param newUser
 	 */
-	public void update(int id, User newUser) {
+	public void update(int id, TurfOwner newTurfOwner) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "UPDATE User SET first_name = ? , last_name = ?  , password = ? WHERE is_active = 1 AND id = ?";
+			String query = "UPDATE TurfOwner SET name = ? , email = ?  , password = ? WHERE is_active = 1 AND id = ?";
 			ps = con.prepareStatement(query);
-			ps.setString(1, newUser.getFirstName());
-			ps.setString(2, newUser.getLastName());
-			ps.setString(3, newUser.getPassword());
+			ps.setString(1, newTurfOwner.getName());
+			ps.setString(2, newTurfOwner.getEmail());
+			ps.setString(3, newTurfOwner.getPassword());
 			ps.setInt(4, id);
 			int rowsAffected = ps.executeUpdate();
 			if (rowsAffected > 0) {
-				System.out.println("User had been updated successfully");
+				System.out.println("TurfOwner had been updated successfully");
 			} else {
-				throw new RuntimeException("User had not been updated successfully");
+				throw new RuntimeException("TurfOwner had not been updated successfully");
 			}
 
 		} catch (SQLException e) {
@@ -117,7 +116,7 @@ public class UserDAO {
 		}
 	}
 
-	/** 
+	/**
 	 * 
 	 * @param id
 	 */
@@ -126,14 +125,14 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "UPDATE User SET is_active = 0 WHERE id = ?";
+			String query = "UPDATE TurfOwner SET is_active = 0 WHERE id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			int rowsAffected = ps.executeUpdate();
 			if (rowsAffected > 0) {
-				System.out.println("User had been deleted successfully");
+				System.out.println("TurfOwner had been deleted successfully");
 			} else {
-				throw new RuntimeException("User does not exist");
+				throw new RuntimeException("TurfOwner does not exist");
 			}
 
 		} catch (SQLException e) {
@@ -145,30 +144,29 @@ public class UserDAO {
 		}
 	}
 
-	/** 
+	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public User findById(int id) {
+	public TurfOwner findById(int id) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		User user = null;
+		TurfOwner turfowner = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT id, first_name, last_name,email, password, is_active FROM User WHERE is_active = 1 AND id = ?";
+			String query = "SELECT id, name, email, password, is_active FROM TurfOwner WHERE is_active = 1 AND id = ?";
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				user = new User();
-				user.setId(rs.getInt("id"));
-				user.setFirstName(rs.getString("first_name"));
-				user.setLastName(rs.getString("last_name"));
-				user.setEmailId(rs.getString("email"));
-				user.setPassword(rs.getString("password"));
-				user.setActive(rs.getBoolean("is_active"));
+				turfowner = new TurfOwner();
+				turfowner.setId(rs.getInt("id"));
+				turfowner.setName(rs.getString("name"));
+				turfowner.setEmail(rs.getString("email"));
+				turfowner.setPassword(rs.getString("password"));
+				turfowner.setActive(rs.getBoolean("is_active"));
 			}
 
 		} catch (SQLException e) {
@@ -179,47 +177,49 @@ public class UserDAO {
 			ConnectionUtil.close(con, ps, rs);
 		}
 
-		return user;
+		return turfowner;
 	}
 
-	/** 
+	/**
 	 * 
 	 * @param email
 	 * @return
 	 */
-	public User findByEmail(String email) {
+	public TurfOwner findByEmail(String email) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		User user = null;
+		TurfOwner turfowner = null;
 		try {
 			con = ConnectionUtil.getConnection();
-			String query = "SELECT id, first_name, last_name, email, password, is_active FROM User WHERE is_active = 1 AND email = ?";
+			String query = "SELECT id, name,  email, password, is_active FROM TurfOwner WHERE is_active = 1 AND email = ?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				user = new User();
-				user.setId(rs.getInt("id"));
-				user.setFirstName(rs.getString("first_name"));
-				user.setLastName(rs.getString("last_name"));
-				user.setEmailId(rs.getString("email"));
-				user.setPassword(rs.getString("password"));
-				user.setActive(rs.getBoolean("is_active"));
-				System.out.println(user);
+				turfowner = new TurfOwner();
+				turfowner.setId(rs.getInt("id"));
+				turfowner.setName(rs.getString("name"));
+				turfowner.setEmail(rs.getString("email"));
+				turfowner.setPassword(rs.getString("password"));
+				turfowner.setActive(rs.getBoolean("is_active"));
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			if (e.getMessage().contains("Duplicate entry")) {
-				throw new RuntimeException("User already exists");
+				throw new RuntimeException("turfowner already exists");
 			}
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
 
-		return user;
+		return turfowner;
 	}
 
-	
+	public void update(int id, TurfOwnerService turfowner) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

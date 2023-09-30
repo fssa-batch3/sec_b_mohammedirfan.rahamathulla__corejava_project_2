@@ -9,7 +9,7 @@ import in.fssa.turf.model.User;
 
 public class BookingServiceImpl implements BookingService {
 
-    private BookingDAO bookingDAO;
+    private BookingDAOImpl bookingDAO;
 
     public BookingServiceImpl() {
         this.bookingDAO = new BookingDAOImpl();
@@ -21,10 +21,10 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> getAllBookings(String email) {
-        return bookingDAO.findAllByEmail(email);
+    public List<Booking> getAllBookings(int id) {
+        return bookingDAO.findAllById(id);
     }
-
+  
     @Override
     public void saveBooking(Booking booking) {
         bookingDAO.save(booking);
@@ -65,6 +65,12 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public List<Booking> getAllBookings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Booking> getAllBookings(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
